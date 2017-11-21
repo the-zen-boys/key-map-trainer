@@ -17,11 +17,17 @@ export default class KeyMapParser {
     return shortcuts;
   }
 
-  convertStringToCode(dictionary, keyString) {
-    for (const kvp in dictionary) {
+  // TODO helper method which should be moved from this class
+  static convertStringToCode(dictionary, keyString) {
+    const item = dictionary.find(kvp => Boolean(kvp === keyString));
+
+    if (item) {
       const key = Object.keys(keyString)[0];
-      if (kvp === keyString) return kvp[key];
+      return item[key];
     }
-    throw Error(`Could not find a definition for key string "${keyString}".`);
+
+    throw Error(
+      `Could not find a definition for key string "${keyString}".`,
+    );
   }
 }
