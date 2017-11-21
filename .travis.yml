@@ -5,4 +5,4 @@ node_js:
 #  - npm install -g vue-cli
 script:
   - npm run build
-  - npm test
+  - npm run unit
