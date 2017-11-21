@@ -9,5 +9,5 @@ addons:
 before_script:
 - npm start &
 script:
-- npm test
+- npm test-ci
 - pkill node
