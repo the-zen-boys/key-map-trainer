@@ -1,6 +1,6 @@
 # key-map-trainer
 
-> Key map trainer for IDE's
+> A Vue.js project
 
 ## Build Setup
 
