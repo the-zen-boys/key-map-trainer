@@ -1,8 +1,12 @@
 <template>
-  <div></div>
+  <div>
+    <key-input-listener @key-combination-changed="_keyCombinationChanged"></key-input-listener>
+  </div>
 </template>
 
 <script>
+import KeyInputListener from './KeyInputListener';
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -10,23 +14,17 @@ export default {
       msg: 'Welcome to Your Vue.js App',
     };
   },
+
+  methods: {
+    _keyCombinationChanged(combination) {
+      console.log(combination);
+    },
+  },
+  components: { KeyInputListener },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
