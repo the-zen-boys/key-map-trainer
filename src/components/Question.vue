@@ -1,15 +1,11 @@
 <template>
   <div>
-    <div>
-      <span>How does one {{currentQuestion.description}}?</span>
-    </div>
-    <key-input-listener @key-combination-changed="_keyCombinationChanged"></key-input-listener>
+    <span>How does one {{currentQuestion.description}}?</span>
   </div>
 </template>
 
 <script>
-import _ from 'lodash';
-import KeyInputListener from './KeyInputListener';
+// import _ from 'lodash';x
 
 export default {
   name: 'Question',
@@ -29,16 +25,6 @@ export default {
       questions: [{ codes: [12, 13], description: 'copy selection' }],
     };
   },
-
-  methods: {
-    _keyCombinationChanged(combination) {
-      console.log(combination);
-      if (_.isEmpty(_.xor(combination, this.currentQuestion.codes))) {
-        console.log('is equal');
-      }
-    },
-  },
-  components: { KeyInputListener },
 };
 </script>
 
