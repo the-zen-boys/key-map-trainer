@@ -15,17 +15,12 @@ describe('key-map-parser.js', () => {
         }]
     }`;
     const keyMapParser = new KeyMapParser();
-    // const expectedValue = [
-    //   {
-    //     codes: [[17, 75], [13]],
-    //     description: 'Keep file open in editor.',
-    //   },
-    // ];
+    const expectedCharCodes = [[17, 15], [13]];
 
     // When
-    const shortcuts = keyMapParser.parseFromString(jsonString);
+    const actualCharCodes = keyMapParser.parseFromString(jsonString);
 
     // Then
-    expect(shortcuts).to.deep.equal([[17, 15], [13]]); // TODO mike. Fix test and functionality.
+    expect(actualCharCodes).to.deep.equal(expectedCharCodes);
   });
 });
