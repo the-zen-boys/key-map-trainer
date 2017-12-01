@@ -5,8 +5,7 @@ describe('key-map-parser.js', () => {
     // Given
     const jsonString = `{
         "definitions": [
-            {"[ctrl]": 17}, 
-            {"k": 15},
+            {"[ctrl]": 17},
             {"[enter]": 13}
         ],
         "shortcuts": [{
@@ -15,10 +14,38 @@ describe('key-map-parser.js', () => {
         }]
     }`;
     const keyMapParser = new KeyMapParser();
-    const expectedCharCodes = [[17, 15], [13]];
+    const expectedCharCodes = [[17, 107], [13]];
 
     // When
-    const actualCharCodes = keyMapParser.parseFromString(jsonString);
+    const actual = keyMapParser.parseFromString(jsonString);
+    const actualCharCodes = actual[0].keys;
+
+    // Then
+    expect(actualCharCodes).to.deep.equal(expectedCharCodes);
+  });
+
+  it('Can parse multiple shortcuts defined in the key map', () => {
+    // Given
+    const jsonString = `{
+        "definitions": [
+            {"[ctrl]": 17},
+            {"[alt]": 18},
+            {"[enter]": 13}
+        ],
+        "shortcuts": [{
+            "keys": ["[ctrl] k", "[enter]"],
+            "description": "Just some key short cut"
+        },{
+            "keys": ["[alt] l", "p l"],
+            "description": "Amazing lift off short cut"
+        }]
+    }`;
+    const keyMapParser = new KeyMapParser();
+    const expectedCharCodes = [[18, 108], [112, 108]];
+
+    // When
+    const actual = keyMapParser.parseFromString(jsonString);
+    const actualCharCodes = actual[1].keys;
 
     // Then
     expect(actualCharCodes).to.deep.equal(expectedCharCodes);
