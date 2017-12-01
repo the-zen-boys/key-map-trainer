@@ -23,12 +23,14 @@ export default {
       previousCombination: [],
     };
   },
+
   created() {
     window.addEventListener('keydown', (event) => {
       const keyDown = _.find(this.keysDown, { key: event.key });
       if (!keyDown) {
         this.keysDown.push({ key: event.key, keyCode: event.keyCode });
-        this.$emit('key-combination-changed', this.keysDown);
+        const keyCombinations = this.getKeyCombinations();
+        this.$emit('key-combination-changed', keyCombinations);
         this.keysPressed += 1;
       }
 
@@ -57,6 +59,13 @@ export default {
           window.event.cancelBubble = true;
         }
       }
+    },
+
+    getKeyCombinations() {
+      return [
+        this.previousCombination.map(item => item.keyCode),
+        this.keysDown.map(item => item.keyCode),
+      ];
     },
   },
 };

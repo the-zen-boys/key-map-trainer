@@ -9,6 +9,7 @@
 
 <script>
 // import _ from 'lodash';
+import _ from 'lodash';
 import KeyMapParser from '../libs/key-map-parser';
 import template from '../assets/keymaps/template.json';
 import Question from './Question';
@@ -41,10 +42,12 @@ export default {
   },
 
   methods: {
-    _keyCombinationChanged() { // combination
-      // if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
-      //   console.log('is equal');
-      // }
+    _keyCombinationChanged(combination) {
+      console.log(combination);
+      console.log(this.currentQuestion.keys);
+      if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
+        console.log('is equal');
+      }
     },
 
     showAnswer() {
