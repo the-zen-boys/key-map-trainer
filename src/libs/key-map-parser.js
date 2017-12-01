@@ -16,10 +16,12 @@ export default class KeyMapParser {
         shortcuts.push(keyCodeArray);
       });
 
-      convertedKeyMap.push({
+      const shortCutObj = {
         keys: shortcuts,
+        keysAsText: this.getTextualPresentionOfKeyCombination(shortcut.keys),
         description: shortcut.description,
-      });
+      };
+      convertedKeyMap.push(shortCutObj);
     });
 
     return convertedKeyMap;
@@ -45,5 +47,16 @@ export default class KeyMapParser {
     throw Error(
       `Could not find a definition for key string "${keyString}".`,
     );
+  }
+
+  getTextualPresentionOfKeyCombination(keysArray) { // eslint-disable-line class-methods-use-this
+    let text = '';
+    keysArray.forEach((keyText, index) => {
+      text += keyText;
+      if (index < keysArray.length - 1) {
+        text += ', ';
+      }
+    });
+    return text;
   }
 }

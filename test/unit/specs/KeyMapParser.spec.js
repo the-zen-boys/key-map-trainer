@@ -77,4 +77,34 @@ describe('key-map-parser.js', () => {
     // Then
     expect(actualCharCodes).to.deep.equal(expectedDescription);
   });
+
+  it('key combination is added as string on parsed key map', () => {
+    // Given
+    const jsonString = `{
+        "definitions": [
+            {"[ctrl]": 17},
+            {"[alt]": 18},
+            {"[enter]": 13}
+        ],
+        "shortcuts": [{
+            "keys": ["[ctrl] k", "[enter]"],
+            "description": "Die pizza komt mn strot uit. Net nog een stukske verder dan mn tong. Bah"
+        }, {
+            "keys": ["[alt] j"],
+            "description": "Plompverloren"
+        }]
+    }`;
+    const keyMapParser = new KeyMapParser();
+    const expectedKeysAsText1 = '[ctrl] k, [enter]';
+    const expectedKeysAsText2 = '[alt] j';
+
+    // When
+    const actual = keyMapParser.parseFromString(jsonString);
+    const actualKeysAsText1 = actual[0].keysAsText;
+    const actualKeysAsText2 = actual[1].keysAsText;
+
+    // Then
+    expect(actualKeysAsText1).equal(expectedKeysAsText1);
+    expect(actualKeysAsText2).equal(expectedKeysAsText2);
+  });
 });
