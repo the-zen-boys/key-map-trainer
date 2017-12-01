@@ -1,6 +1,5 @@
 export default class KeyMapParser {
-  parseFromString(keyMapString) {
-    const keyMap = JSON.parse(keyMapString);
+  parse(keyMap) {
     const convertedKeyMap = [];
     keyMap.shortcuts.forEach((shortcut) => {
       const shortcuts = [];
@@ -23,6 +22,13 @@ export default class KeyMapParser {
       };
       convertedKeyMap.push(shortCutObj);
     });
+
+    return convertedKeyMap;
+  }
+
+  parseFromString(keyMapString) {
+    const keyMap = JSON.parse(keyMapString);
+    const convertedKeyMap = this.parse(keyMap);
 
     return convertedKeyMap;
   }
