@@ -9,7 +9,7 @@ describe('key-map-parser.js', () => {
             {"[enter]": 13}
         ],
         "shortcuts": [{
-            "keys": ["[ctrl] k", "[enter]"],
+            "keys": ["[ctrl] + k", "[enter]"],
             "description": "Just some key short cut"
         }]
     }`;
@@ -33,15 +33,15 @@ describe('key-map-parser.js', () => {
             {"[enter]": 13}
         ],
         "shortcuts": [{
-            "keys": ["[ctrl] k", "[enter]"],
+            "keys": ["[ctrl] + k", "[enter]"],
             "description": "Just some key short cut"
         },{
-            "keys": ["[alt] l", "p l"],
+            "keys": ["[alt] + l", "l"],
             "description": "Amazing lift off short cut"
         }]
     }`;
     const keyMapParser = new KeyMapParser();
-    const expectedCharCodes = [[18, 108], [112, 108]];
+    const expectedCharCodes = [[18, 108], [108]];
 
     // When
     const actual = keyMapParser.parseFromString(jsonString);
@@ -60,10 +60,10 @@ describe('key-map-parser.js', () => {
             {"[enter]": 13}
         ],
         "shortcuts": [{
-            "keys": ["[ctrl] k", "[enter]"],
+            "keys": ["[ctrl] + k", "[enter]"],
             "description": "Just some key short cut"
         },{
-            "keys": ["[alt] l", "p l"],
+            "keys": ["[alt] + l", "l"],
             "description": "Amazing lift off short cut"
         }]
     }`;
@@ -87,16 +87,16 @@ describe('key-map-parser.js', () => {
             {"[enter]": 13}
         ],
         "shortcuts": [{
-            "keys": ["[ctrl] k", "[enter]"],
+            "keys": ["[ctrl] + k", "[enter]"],
             "description": "Die pizza komt mn strot uit. Net nog een stukske verder dan mn tong. Bah"
         }, {
-            "keys": ["[alt] j"],
+            "keys": ["[alt] + j"],
             "description": "Plompverloren"
         }]
     }`;
     const keyMapParser = new KeyMapParser();
-    const expectedKeysAsText1 = '[ctrl] k, [enter]';
-    const expectedKeysAsText2 = '[alt] j';
+    const expectedKeysAsText1 = '[ctrl] + k, [enter]';
+    const expectedKeysAsText2 = '[alt] + j';
 
     // When
     const actual = keyMapParser.parseFromString(jsonString);

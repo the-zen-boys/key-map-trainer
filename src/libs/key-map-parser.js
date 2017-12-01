@@ -6,7 +6,7 @@ export default class KeyMapParser {
       shortcut.keys.forEach((keyStroke) => {
         const keyCodeArray = [];
 
-        const keyStrings = keyStroke.split(' ');
+        const keyStrings = keyStroke.replace(' ', '').split('+');
         keyStrings.forEach((keyString) => {
           const code = this.convertStringToCode(keyMap.definitions, keyString);
           keyCodeArray.push(code);
@@ -35,14 +35,15 @@ export default class KeyMapParser {
 
   // TODO helper method which should be moved from this class
   convertStringToCode(dictionary, keyString) { // eslint-disable-line
-    if (keyString.length === 1) {
-      return keyString.charCodeAt(0);
+    const keyStr = keyString.replace(' ', '');
+    if (keyStr.length === 1) {
+      return keyStr.charCodeAt(0);
     }
 
     let item = null;
     dictionary.forEach((kvp) => {
-      if (typeof kvp[keyString] !== 'undefined') {
-        item = kvp[keyString];
+      if (typeof kvp[keyStr] !== 'undefined') {
+        item = kvp[keyStr];
       }
     });
 

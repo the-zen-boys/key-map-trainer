@@ -4,7 +4,7 @@
         {"[enter]": 13}
     ],
     "shortcuts": [{
-        "keys": ["[ctrl] k", "[enter]"],
+        "keys": ["[ctrl] + k", "[enter]"],
         "description": "Keep file open in editor."
     }]
 }

@@ -1,6 +1,8 @@
 <template>
   <div>
     <question :question="currentQuestion"></question>
+    <button v-show="!doShowAnswer" v-on:click="showAnswer">Show me the answer</button>
+    <p v-show="doShowAnswer">{{ currentQuestion.keysAsText }}</p>
     <key-input-listener @key-combination-changed="_keyCombinationChanged"></key-input-listener>
   </div>
 </template>
@@ -28,7 +30,13 @@ export default {
 
   data() {
     return {
-      questions: [{ keys: [[12, 13], [14, 15]], description: 'copy selection' }],
+      currentQuestion: undefined,
+      doShowAnswer: false,
+      questions: [{
+        description: 'copy selection',
+        keys: [[12, 13], [14, 15]],
+        keysAsText: '[ctrl] + c',
+      }],
     };
   },
 
@@ -37,6 +45,10 @@ export default {
       // if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
       //   console.log('is equal');
       // }
+    },
+
+    showAnswer() {
+      this.doShowAnswer = true;
     },
 
     shuffle(array) {
@@ -60,6 +72,11 @@ export default {
     },
   },
   components: { Question, KeyInputListener },
+  watch: {
+    currentQuestion() {
+      this.doShowAnswer = false;
+    },
+  },
 };
 </script>
 
