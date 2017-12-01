@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>How does one {{currentQuestion.description}}?</span>
+    <span>How does one {{question.description}}?</span>
   </div>
 </template>
 
@@ -9,21 +9,11 @@
 
 export default {
   name: 'Question',
-
-  created() {
-    // TODO fetch questions
-
-    // Randomly sort questions
-    if (this.questions && this.questions.length > 0) {
-      this.currentQuestion = this.questions[0];
+  props:{
+    question: {
+      type: Object,
+      required: true,
     }
-  },
-
-  data() {
-    return {
-      currentQuestion: {},
-      questions: [{ codes: [12, 13], description: 'copy selection' }],
-    };
   },
 };
 </script>

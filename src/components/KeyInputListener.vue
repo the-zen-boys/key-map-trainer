@@ -31,15 +31,34 @@ export default {
         this.$emit('key-combination-changed', this.keysDown);
         this.keysPressed += 1;
       }
+
+      this.disabledEventPropagation(event);
+      event.preventDefault();
     });
 
-    window.addEventListener('keyup', () => {
+    window.addEventListener('keyup', (event) => {
       this.keysPressed -= 1;
       if (this.keysPressed === 0) {
         this.previousCombination = _.clone(this.keysDown);
         this.keysDown = [];
       }
+
+      this.disabledEventPropagation(event);
+      event.preventDefault();
     });
+  },
+
+  methods: {
+    disabledEventPropagation(e) {
+      if (e) {
+        if (e.stopPropagation) {
+          console.log('stopping propagation');
+          e.stopPropagation();
+        } else if (window.event) {
+          window.event.cancelBubble = true;
+        }
+      }
+    },
   },
 };
 </script>
