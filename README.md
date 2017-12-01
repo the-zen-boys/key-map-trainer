@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/the-zen-boys/key-map-trainer.svg?branch=master)](https://travis-ci.org/the-zen-boys/key-map-trainer)
+
 # key-map-trainer
 
 > A Vue.js project

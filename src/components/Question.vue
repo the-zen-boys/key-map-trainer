@@ -9,11 +9,11 @@
 
 export default {
   name: 'Question',
-  props:{
+  props: {
     question: {
       type: Object,
       required: true,
-    }
+    },
   },
 };
 </script>

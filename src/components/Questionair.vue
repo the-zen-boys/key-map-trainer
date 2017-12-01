@@ -28,41 +28,38 @@ export default {
 
   data() {
     return {
-      questions: [{ keys: [[12, 13], [14, 15]], description: 'copy selection' }]
+      questions: [{ keys: [[12, 13], [14, 15]], description: 'copy selection' }],
     };
   },
 
   methods: {
-    _keyCombinationChanged(combination) {
-      console.log('comparing');
-      console.log(this.currentQuestion.keys);
-      console.log(combination);
-      if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
-        console.log('is equal');
-      }
+    _keyCombinationChanged() { // combination
+      // if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
+      //   console.log('is equal');
+      // }
     },
 
     shuffle(array) {
-      var currentIndex = array.length,
-        temporaryValue,
-        randomIndex;
+      let currentIndex = array.length;
+      let temporaryValue;
+      let randomIndex;
 
       // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
+      while (currentIndex !== 0) {
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
         // And swap it with the current element.
         temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        array[currentIndex] = array[randomIndex]; // eslint-disable-line no-param-reassign
+        array[randomIndex] = temporaryValue; // eslint-disable-line no-param-reassign
       }
 
       return array;
     },
   },
-  components: { Question, KeyInputListener }
+  components: { Question, KeyInputListener },
 };
 </script>
 
