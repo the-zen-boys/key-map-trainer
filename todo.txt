@@ -1,0 +1,39 @@
+To Do
+
+#Minimal Viable Product {
+    - Compare 1D key combination (like [ctrl] + K)
+        - on success load next question
+    - Make listener understand 2D key combinations like "[ctrl] + K, [Enter]"
+    - Compare 2D key combination pressed
+    - Fill template.json with all keys from visual studio code
+        - rename to more correclty descriptive name.
+}
+
+#Features {
+    #Categories {
+        - Add categories to key map
+        - Support categories in key-map-parser.
+        - Make questionair understand usage of categories by being able to filter the question list based on one or more categories.
+        - Allow selection of one or more categories (or just all) to use in questionair.
+    }
+    #Support-multiple-maps {}
+        - Read map from file
+            - List possible maps in a selectbox.
+                - On select, load questions of map.
+    }
+    #Wrong-question-loop {
+        - Have option to go to next question on wrong answer, or keep 'Show me the answer' button.
+        - Add wrong answered questions to separate list and reload that list when all questions have been answered.
+        - Visualize this list of faulty answered questions.
+        - Visualize list of correclty answered questions.
+    }
+}
+
+#Improvements {
+    - Change logo to something more appropriate.
+    - Add styling, like bootstrap or so.
+}
+
+#History-Log {
+
+}
