@@ -23,51 +23,62 @@ export default {
     const questions = keyMapParser.parse(template);
 
     this.questions = this.shuffle(questions);
-
-    if (this.questions && this.questions.length > 0) {
-      this.currentQuestion = this.questions[0];
-    }
   },
 
   data() {
     return {
-      currentQuestion: undefined,
       doShowAnswer: false,
-      questions: [{
-        description: 'copy selection',
-        keys: [[12, 13], [14, 15]],
-        keysAsText: '[ctrl] + c',
-      }],
+      questionIndex: 0,
+      questions: [],
     };
+  },
+
+  computed: {
+    currentQuestion() {
+      if (!this.questions || this.questions.length === 0) return undefined;
+      return this.questions[this.questionIndex];
+    }
   },
 
   methods: {
     _keyCombinationChanged(combination) {
-      console.log(combination);
-      console.log(this.currentQuestion.keys);
-      if (_.isEmpty(_.xor(combination, this.currentQuestion.keys))) {
-        console.log('is equal');
-      }
-      console.log('Is correct: ');
       const isCorrect = this._isCorrectKeyCombination(this.currentQuestion.keys, combination);
-      console.log(isCorrect);
+      if (isCorrect) {
+        console.log('Question is correct.');
+        this.loadNextQuestion();
+      }
     },
 
-    _isCorrectKeyCombination: function (questionKeysCombi, pressedKeysCombi) {
-      if (questionKeysCombi.length !== pressedKeysCombi.length) return false;
+    _isCorrectKeyCombination (questionKeysCombi, pressedKeysCombi) {
+      if (questionKeysCombi.length > pressedKeysCombi.length) return false;
+
+      // Discard previous pressed key combination if question only requires one combination
+      if (questionKeysCombi.length === 1 && pressedKeysCombi.length === 2) {
+        pressedKeysCombi = [pressedKeysCombi[1]];
+      }
+
+      console.log(questionKeysCombi);
+      console.log(pressedKeysCombi);
 
       for (let i = 0; i < questionKeysCombi.length; i++) {
         var questionKeys = questionKeysCombi[i];
         var pressedKeys = pressedKeysCombi[i];
         if (questionKeys.length !== pressedKeys.length) return false;
-        for(let j = 0; j < questionKeys.length; j++) {
-          var questionKey = questionKeys[j];
-          var pressedKey = pressedKeys[j];
-          if (questionKey !== pressedKey) return false;
-        }
+        if(!_.isEmpty(_.xor(questionKeys, pressedKeys))) return false;
       }
       
       return true;
+    },
+
+    loadNextQuestion () {
+      if(this.questions.length-1 > this.questionIndex) {
+        this.questionIndex++;
+      } else {
+        console.log('Questionair is complete, shuffle question list and restart.');
+        // For now, just start over.
+        this.questions = this.shuffle(this.questions);
+        this.questionIndex = 0;
+      }
     },
 
     showAnswer() {

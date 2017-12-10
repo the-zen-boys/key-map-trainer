@@ -1,10 +1,13 @@
 {
     "definitions": [
-        {"[ctrl]": 17}, 
-        {"[enter]": 13}
+        {"[Ctrl]": 17}, 
+        {"[Enter]": 13}
     ],
     "shortcuts": [{
-        "keys": ["[ctrl] + K", "[enter]"],
-        "description": "Keep file open in editor."
+        "keys": ["[Ctrl]+K", "[Enter]"],
+        "description": "Keep file open in editor"
+    }, {
+        "keys": ["[Ctrl]+F"],
+        "description": "discard crappy code"
     }]
 }
