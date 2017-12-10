@@ -11,7 +11,7 @@
 // import _ from 'lodash';
 import _ from 'lodash';
 import KeyMapParser from '../libs/key-map-parser';
-import template from '../assets/keymaps/template.json';
+import VisualStudioCodeKeyMap from '../assets/keymaps/visual-studio-code.json';
 import Question from './Question';
 import KeyInputListener from './KeyInputListener';
 
@@ -20,7 +20,7 @@ export default {
 
   created() {
     const keyMapParser = new KeyMapParser();
-    const questions = keyMapParser.parse(template);
+    const questions = keyMapParser.parse(VisualStudioCodeKeyMap);
 
     this.questions = this.shuffle(questions);
   },

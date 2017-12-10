@@ -1,12 +1,13 @@
 To Do
 
 #Minimal Viable Product {
-    - Compare 1D key combination (like [ctrl] + K)
-        - on success load next question
-    - Make listener understand 2D key combinations like "[ctrl] + K, [Enter]"
-    - Compare 2D key combination pressed
+    * Compare 1D key combination (like [ctrl] + K)
+        * on success load next question
+    * Make listener understand 2D key combinations like "[ctrl] + K, [Enter]"
+    * Compare 2D key combination pressed
     - Fill template.json with all keys from visual studio code
-        - rename to more correclty descriptive name.
+        * rename to more correclty descriptive name.
+    - Block all keyboard shortcuts to reach browser functionality, like Ctrl+Shift+W that closes the window for example.
 }
 
 #Features {

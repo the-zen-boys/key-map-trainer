@@ -1,0 +1,18 @@
+{
+    "definitions": [
+        {"[Ctrl]": 17}, 
+        {"[Enter]": 13},
+        {"[Shift]": 16}
+    ],
+    "shortcuts": [
+    {
+        "keys": ["[Ctrl]+[Shift]+P"],
+        "description": "Show Command Palette"
+    }, {
+        "keys": ["[Ctrl]+P"],
+        "description": "Quick Open, Go to File…"
+    }, {
+        "keys": ["[Ctrl]+K", "[Ctrl]+S"],
+        "description": "Keyboard Shortcuts"
+    }]
+}
