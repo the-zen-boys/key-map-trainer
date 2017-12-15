@@ -37,19 +37,19 @@ export default {
     currentQuestion() {
       if (!this.questions || this.questions.length === 0) return undefined;
       return this.questions[this.questionIndex];
-    }
+    },
   },
 
   methods: {
     _keyCombinationChanged(combination) {
-      const isCorrect = this._isCorrectKeyCombination(this.currentQuestion.keys, combination);
+      const isCorrect = this.isCorrectKeyCombination(this.currentQuestion.keys, combination);
       if (isCorrect) {
-        console.log('Question is correct.');
         this.loadNextQuestion();
       }
     },
 
-    _isCorrectKeyCombination (questionKeysCombi, pressedKeysCombi) {
+    isCorrectKeyCombination(questionKeysCombi, pressedKeysCombiArg) {
+      let pressedKeysCombi = pressedKeysCombiArg;
       if (questionKeysCombi.length > pressedKeysCombi.length) return false;
 
       // Discard previous pressed key combination if question only requires one combination
@@ -57,24 +57,20 @@ export default {
         pressedKeysCombi = [pressedKeysCombi[1]];
       }
 
-      console.log(questionKeysCombi);
-      console.log(pressedKeysCombi);
-
-      for (let i = 0; i < questionKeysCombi.length; i++) {
-        var questionKeys = questionKeysCombi[i];
-        var pressedKeys = pressedKeysCombi[i];
+      for (let i = 0; i < questionKeysCombi.length; i += 1) {
+        const questionKeys = questionKeysCombi[i];
+        const pressedKeys = pressedKeysCombi[i];
         if (questionKeys.length !== pressedKeys.length) return false;
-        if(!_.isEmpty(_.xor(questionKeys, pressedKeys))) return false;
+        if (!_.isEmpty(_.xor(questionKeys, pressedKeys))) return false;
       }
-      
+
       return true;
     },
 
-    loadNextQuestion () {
-      if(this.questions.length-1 > this.questionIndex) {
-        this.questionIndex++;
+    loadNextQuestion() {
+      if (this.questions.length - 1 > this.questionIndex) {
+        this.questionIndex = this.questionIndex + 1;
       } else {
-        console.log('Questionair is complete, shuffle question list and restart.');
         // For now, just start over.
         this.questions = this.shuffle(this.questions);
         this.questionIndex = 0;
